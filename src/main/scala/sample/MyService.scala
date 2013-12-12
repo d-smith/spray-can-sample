@@ -1,17 +1,31 @@
 package sample
 
-import akka.actor.{Actor, ActorLogging}
+import akka.actor.{Props, ActorSystem, Actor, ActorLogging}
 import spray.can.Http
 import spray.http._
 import HttpMethods._
 import scala.concurrent.duration._
 import spray.http.HttpRequest
 import spray.http.HttpResponse
-import spray.http.Uri.Path
 
+case class Slowness(howSlow: FiniteDuration)
+
+class SlowOne extends Actor with ActorLogging {
+  import context.dispatcher
+  def receive = {
+    case Slowness(magnitude) => {
+      val s = sender
+      context.system.scheduler.scheduleOnce(magnitude) {
+        s !  HttpResponse(entity ="slow one done " + System.currentTimeMillis)
+      }
+    }
+  }
+}
 
 class MyService extends Actor with  ActorLogging {
-  import context.dispatcher
+
+  implicit val system = ActorSystem()
+  val slowOne = system.actorOf(Props[SlowOne])
 
   def parseTimeout(path: String) : FiniteDuration = {
     val default = 22 seconds
@@ -36,10 +50,7 @@ class MyService extends Actor with  ActorLogging {
 
     case HttpRequest(GET, Uri.Path(path),_,_,_) if path startsWith "/slowone" => {
       val timeout = parseTimeout(path)
-      val s = sender
-      context.system.scheduler.scheduleOnce(timeout) {
-        s !  HttpResponse(entity ="slow one done")
-      }
+      slowOne forward Slowness(timeout)
     }
 
     case _: HttpRequest => sender ! HttpResponse(status = 404, entity = "Unknown resource!")
