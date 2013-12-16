@@ -9,6 +9,7 @@
 	
     <properties>
         <scala.version>2.10.3</scala.version>
+        <scalatest.version>1.9.1</scalatest.version>
         <akka.version>2.2.3</akka.version>
         <spray.version>1.2.0</spray.version>
     </properties>
@@ -23,9 +24,22 @@
         </dependency>
 
         <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-testkit_2.10</artifactId>
+            <version>${akka.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>io.spray</groupId>
             <artifactId>spray-can</artifactId>
             <version>${spray.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scalatest</groupId>
+            <artifactId>scalatest_2.10</artifactId>
+            <version>${scalatest.version}</version>
+            <scope>test</scope>
         </dependency>
 		
 		<dependency>

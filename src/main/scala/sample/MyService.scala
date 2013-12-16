@@ -26,7 +26,7 @@ class PosterChild extends Actor with  ActorLogging {
   def receive = {
     case body:String => {
       log.info(s"Body posted: $body")
-      sender !  HttpResponse(entity ="poster child done " + System.currentTimeMillis)
+      sender !  HttpResponse(entity ="poster child done ")
     }
   }
 }
