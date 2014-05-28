@@ -1,9 +1,8 @@
 package sample
 
-import akka.testkit.TestKit
 import org.scalatest.{BeforeAndAfterAll, FunSuite}
 import org.scalatest.matchers.ShouldMatchers
-import akka.testkit.{ TestProbe, ImplicitSender, TestKit }
+import akka.testkit.{ ImplicitSender, TestKit }
 import akka.actor.{Props, ActorSystem}
 import scala.concurrent.duration._
 import spray.http.HttpResponse

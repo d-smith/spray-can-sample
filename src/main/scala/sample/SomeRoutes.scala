@@ -35,20 +35,7 @@ class GnopDirectives extends Directives {
   }
 }
 
-class RoutedHttpService(route: Route) extends Actor with HttpService {
-  implicit def actorRefFactory = context
-  def receive = runRoute(route)
-}
 
-object RouteConconcatenator extends RouteConcatenation {
-  def concatRoutes(chain: Route, routes: List[Route]) : Route = {
-    routes match {
-      case Nil => chain
-      case h :: Nil => chain ~ h
-      case h :: t => concatRoutes(chain ~ h, t)
-    }
-  }
-}
 
 // This main simulates the case where we might find all the directives in an OSGi container
 // that have been exported as services, and build a concatenated route to allow a single
