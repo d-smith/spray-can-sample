@@ -7,7 +7,9 @@ import akka.actor.{Props, ActorSystem}
 import akka.io.IO
 import spray.can.Http
 
-case class Note(val workItemNo: String, val memo: String, val body: String)
+trait JsonResult
+
+case class Note(val workItemNo: String, val memo: String, val body: String) extends JsonResult
 
 object NoteJsonSupport extends DefaultJsonProtocol {
   implicit val impNote = jsonFormat3(Note)

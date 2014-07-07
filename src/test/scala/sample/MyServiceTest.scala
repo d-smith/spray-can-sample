@@ -6,8 +6,10 @@ import akka.testkit.{ ImplicitSender, TestKit }
 import akka.actor.{Props, ActorSystem}
 import scala.concurrent.duration._
 import spray.http.HttpResponse
+import org.junit.runner.RunWith
 
-class MyServiceTests(_system: ActorSystem) extends TestKit(_system) with FunSuite with ShouldMatchers with BeforeAndAfterAll with
+@RunWith(classOf[org.scalatest.junit.JUnitRunner])
+class MyServiceTest(_system: ActorSystem) extends TestKit(_system) with FunSuite with ShouldMatchers with BeforeAndAfterAll with
   ImplicitSender {
 
   def this() = this(ActorSystem("MyServiceSpec"))

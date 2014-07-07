@@ -12,6 +12,7 @@
         <scalatest.version>1.9.1</scalatest.version>
         <akka.version>2.2.3</akka.version>
         <spray.version>1.2.0</spray.version>
+        <junit.version>4.8.1</junit.version>
     </properties>
 
     <repositories>
@@ -74,38 +75,17 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
  
     </dependencies>
 
-    <!--
-    <build>
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
-        <plugins>
-            <plugin>
-                <groupId>org.scala-tools</groupId>
-                <artifactId>maven-scala-plugin</artifactId>
-				<version>2.15.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <scalaVersion>${scala.version}</scalaVersion>
-                    <args>
-                        <arg>-target:jvm-1.5</arg>
-                    </args>
-                </configuration>
-            </plugin>
 
-            
-        </plugins>
-    </build>
-   -->
 
     <build>
         <pluginManagement>
@@ -148,6 +128,20 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+
+        </plugins>
     </build>
     
 </project>
