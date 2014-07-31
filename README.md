@@ -12,3 +12,8 @@ For the access token service:
 
       curl -vX POST http://localhost:8666/token -H "Content-Type:application/x-www-form-urlencoded" --data @access
 
+Or just:
+
+     curl -vX POST http://localhost:8666/token -H "Content-Type:application/x-www-form-urlencoded" --data "grant_type=password&client_id=xtracmobile1&client_secret=foo&username=joeuser&password=changeme&tenant_id=acme"
+
+
